@@ -45,10 +45,15 @@ def Elso():
     cv2.waitKey()
 
 def Masodik():
+
+    #A program a felhasználótól bekéri a kép teljes elérési útvonalát.
     path = input("path= ")
     img = cv2.imread(path,1)
-    threshValue = numpy.uint8(input("thresh= "))
+    #A program bekér a felhasználótól egy küszöbértéket, és a küszöbölést* követően első
+    #lépésként kimaszkolja azokat a részeket a szerkesztendő képről, amelyek az alábbi
+    #kritériumnak megfelelnek: (4p)
 
+    threshValue = numpy.uint8(input("thresh= "))
     hsv = cv2.cvtColor(img,cv2.COLOR_RGB2HSV)
     mask = cv2.threshold(hsv[:,:,0],threshValue,255,cv2.THRESH_BINARY)
     mask = mask[1] # csak a tombre van szuksegunk
@@ -60,17 +65,23 @@ def Masodik():
         for j in range(0,hsv.shape[1]):
             if mask[i,j] ==255 :
                 pixelGroup = hsv[i,j,:]
-
+    #o Az adott pixelérték színértéke a küszöbérték kétszeresét nem haladja meg,
+    #o Az adott pixelérték szaturációs értéke a 50 és 170-as sávba,
+    #o Az adott pixelérték világossági értéke a 100 és 200-as sávba esik.
                 if (pixelGroup[0] < threshValue*2) and \
                     (pixelGroup[1] >=50 and pixelGroup[1] <=170) and \
                     (pixelGroup[2] >=100 and pixelGroup[2] <=200):
+                    #Fontos rész, hogy a maszkolás mellett ezeket a pixeleknek az indexeit is tárolja a program
+                    #tetszőlegesen megválasztott adatstruktúrában (tömb, verem, stb.)
                         indexes.append(tuple((i,j)))
                         masked[i,j,:] = pixelGroup
     for index in indexes:
         n = random.random()
         if n>=0.5:
             indexes_res.append(index)
-
+    #A program csak a maszkolt részek felét hagyja meg véletlenszerűen az eredeti képen, a többi
+    #részt törli az eredeti szerkesztendő képről, majd ezt követően eltünteti a megmaradt apróbb
+    #hibákat a felhasználó által megadott méret** szerint. (2p)
     mask2 = numpy.zeros(mask.shape,dtype=numpy.uint8)
 
     for index in indexes_res:
@@ -84,6 +95,8 @@ def Masodik():
 
     for i in range(0,3):
         hsv_result[:,:,i] = cv2.bitwise_and(hsv[:,:,i],opened)
+
+    #A program a törölt képrészeket feltölti a felhasználó által megadott háttérszín értékeivel. (2p)
 
     hue = numpy.uint8(input("hue="))
     sat = numpy.uint8(input("sat="))
