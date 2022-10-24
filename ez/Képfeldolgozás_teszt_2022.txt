@@ -1,0 +1,71 @@
+Név:
+
+Pontszám:
+
+Neptun kód:
+
+Képfeldolgozás a gyakorlatban (2020/2021 I.)
+Tudnivalók:
+•
+•
+
+•
+•
+
+A feladat megoldásait egy új projekten belül helyezze el. A projekt neve a saját neptun kódja legyen, és
+állítsa be hozzá az aktuális openCV környezetet (verzió: 4.6.2)
+OpenCV hivatalos referencia, az órákon implementált kódok, és a segédlet használata megengedett,
+digitális kommunikációs csatornák, és az ezt lehetővé tevő szoftveres technológiák használata
+TILOS!
+A megoldásra 100 perc áll rendelkezésre.
+Maximálisan 20 pont szerezhető.
+
+Feladatleírások
+1. Feladat: Képkinyerő rész implementálása (12p)
+Az alapfeladat egy egyszerű szövegkinyerő program implementálása lesz az alábbi szempontok
+szerint:
+•
+•
+•
+•
+•
+
+A program a felhasználótól bekéri a szerkesztendő kép teljes elérési útvonalát, majd
+megnyitja ezt a képfájlt. (1p)
+A program elvégzi automatikusan a szükséges képkorrekciós műveleteket. (3p)
+#A program a felhasználó által megadott érték alapján küszöbölést hajt végre. (2p)
+#A program lehetőséget biztosít a felhasználó számára a kinyert rész színparamétereinek
+#(színezet, színtelítettség és világosság) megadására. (4p)
+#A program eredményként kimenti a felhasználó által megadott elérési útvonalra a
+#szerkesztett képet JPEG formátumban, 92%-os minőségi arányban. (2p)
+
+2. Feladat: képmanipulációs rész implementálása (8p)
+A megoldandó feladat egy összetettebb képmódosító szoftver kidolgozása lesz a következő
+szempontok szerint:
+•
+•
+
+•
+
+•
+
+A program a felhasználótól bekéri a kép teljes elérési útvonalát.
+A program bekér a felhasználótól egy küszöbértéket, és a küszöbölést* követően első
+lépésként kimaszkolja azokat a részeket a szerkesztendő képről, amelyek az alábbi
+kritériumnak megfelelnek: (4p)
+o Az adott pixelérték színértéke a küszöbérték kétszeresét nem haladja meg,
+o Az adott pixelérték szaturációs értéke a 50 és 170-as sávba,
+o Az adott pixelérték világossági értéke a 100 és 200-as sávba esik.
+Fontos rész, hogy a maszkolás mellett ezeket a pixeleknek az indexeit is tárolja a program
+tetszőlegesen megválasztott adatstruktúrában (tömb, verem, stb.)
+A program csak a maszkolt részek felét hagyja meg véletlenszerűen az eredeti képen, a többi
+részt törli az eredeti szerkesztendő képről, majd ezt követően eltünteti a megmaradt apróbb
+hibákat a felhasználó által megadott méret** szerint. (2p)
+A program a törölt képrészeket feltölti a felhasználó által megadott háttérszín értékeivel. (2p)
+
+*színes kép esetében az összes olyan csatornára érvényes ez az érték az adott színtérben, ahol
+küszöbölés elvégzése szükséges.
+** itt a méret az alkalmazott strukturális elem méretét jelenti
+***az alkalmazott strukturális elem paraméterei: ellipszis alak, 9-es méret.
+
+
